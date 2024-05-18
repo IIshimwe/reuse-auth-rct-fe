@@ -1,0 +1,7 @@
+.form-container {
+  width: 50rem;
+  margin: 2rem 0;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  padding: 5rem;
+}

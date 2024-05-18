@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import "./LoginForm.css";
 
 const schema = z.object({
   email: z.string().email({ message: "Email is required." }),
   password: z
     .string({ required_error: "Password is required" })
-    .min(8, { message: "Password must be atleast 5 characters long" }),
+    .min(5, { message: "Password is required." })
+    .max(255, { message: "Password must be 5 chars long." }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -19,16 +21,11 @@ const LoginForm = () => {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   return (
-    <div
-      style={{
-        width: "50rem",
-        margin: "2rem 0",
-        border: "1px solid #ccc",
-        borderRadius: "1rem",
-        padding: "5rem",
-      }}
-    >
+    <div className="form-container">
       <h1>Login</h1>
+      <p>
+        <span className="text-danger">*</span> Indicates required.
+      </p>
       <form onSubmit={handleSubmit((data) => console.log(data))}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
